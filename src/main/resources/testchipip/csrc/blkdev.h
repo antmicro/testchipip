@@ -58,7 +58,10 @@ class BlockDevice {
     void send_data(struct blkdev_data &data);
     struct blkdev_data recv_response(void);
 
-    void switch_to_host() { host.switch_to(); }
+    void switch_to_host() {
+        target = context_t::current();
+        host.switch_to();
+    }
 
   private:
     uint32_t _ntags;
